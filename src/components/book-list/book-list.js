@@ -3,29 +3,33 @@ import BookListItem from '../book-list-item';
 import { connect } from 'react-redux';
 
 import { withBookstoreService } from '../hoc';
-import { booksLoaded } from '../../components/actions';
-import { compose } from '../../components/utils';
-import Spinner from '../../components/spinner';
+import { booksLoaded, booksRequested, booksError } from '../actions';
+import { compose } from '../utils';
+import Spinner from '../spinner';
+import ErrorIndicator from '../error-indicator';
 
 import './book-list.scss';
 
 class BookList extends Component {
 
   componentDidMount() {
-    const { bookstoreService, booksLoaded } = this.props;
+    const { bookstoreService, booksLoaded, booksRequested, booksError } = this.props;
+
+    booksRequested();                    // loading new data (resetting state) after returning back to the books page
     // 1. receive data
     // const data = bookstoreService.getBooks();     // when there is no asynchronity
-
+    
     // 2. dispacth action to store
-    // booksLoaded(data);                // when there is no asynchronity
-
+    // booksLoaded(data);                            // when there is no asynchronity
     bookstoreService.getBooks()
-      .then((data) => booksLoaded(data));
+      .then((data) => booksLoaded(data))
+      .catch((err) => booksError(err));
   }
 
   render() {
-    const { books, loading } = this.props;
+    const { books, loading, error } = this.props;
     if (loading) return <Spinner />
+    if (error) return <ErrorIndicator />;
 
     return (
       <ul className="book-list">
@@ -41,8 +45,8 @@ class BookList extends Component {
   }
 }
 
-const mapStateToProps = ({ books, loading }) => {    // the same as: const mapStateToProps = ( state ) =>
-  return { books, loading };                         //                  return { books: state.books }; };
+const mapStateToProps = ({ books, loading, error }) => {    // the same as: const mapStateToProps = ( state ) =>
+  return { books, loading, error };                         //                  return { books: state.books }; };
 };
 
 // const mapDispatchToProps = (dispatch) => {
@@ -57,7 +61,9 @@ const mapStateToProps = ({ books, loading }) => {    // the same as: const mapSt
 // }
 // shorter version: 
 const mapDispatchToProps = {
-  booksLoaded
+  booksLoaded,
+  booksRequested,
+  booksError
 };
 
 

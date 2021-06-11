@@ -19,6 +19,7 @@ export default class BookstoreService {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(this.data)
+        //reject(new Error('Error is found')); // for Error testing
       }, 700);
     });
   }
