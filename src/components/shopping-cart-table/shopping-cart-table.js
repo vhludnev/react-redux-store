@@ -13,7 +13,7 @@ const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete }) =
         <td>{idx + 1}</td>
         <td>{title}</td>
         <td>{count}</td>
-        <td>${total}</td>
+        <td>${total.toFixed(2)}</td>
         <td>
           <button
             onClick={() => onDelete(id)}
@@ -61,7 +61,6 @@ const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete }) =
   );
 };
 
-// const mapStateToProps = ({ cartItems, orderTotal }) => {
 const mapStateToProps = ({ shoppingCart: { cartItems, orderTotal }}) => {
   return {
     items: cartItems,
@@ -69,21 +68,6 @@ const mapStateToProps = ({ shoppingCart: { cartItems, orderTotal }}) => {
   };
 };
 
-// const mapDispatchToProps = () => {
-//   return {
-//     onIncrease: (id) => {
-//       console.log(`Increase ${id}`);
-//     },
-
-//     onDecrease: (id) => {
-//       console.log(`Decrease ${id}`);
-//     },
-
-//     onDelete: (id) => {
-//       console.log(`Delete ${id}`);
-//     }
-//   }
-// };
 
 const mapDispatchToProps = {
   onIncrease: bookAddedToCart,

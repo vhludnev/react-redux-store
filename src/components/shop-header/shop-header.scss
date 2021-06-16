@@ -14,11 +14,19 @@
 		align-self: center;
 		font-size: 1.3rem;
 		padding-right: 1rem;
+		padding-top: 0.625rem;;
         
 		.cart-icon {
 			font-size: 2.2rem;
 			color: cadetblue;
-			margin-right: 10px;
+			margin-right: 0.625rem;;
 		}
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.shop-header .shopping-cart {
+		padding-bottom: 1rem;
+		margin-left: 1rem;
 	}
 }

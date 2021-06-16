@@ -12,6 +12,7 @@ specifiers:
   react-router-dom: ^5.2.0
   react-scripts: 4.0.3
   redux: ^4.1.0
+  redux-thunk: ^2.3.0
 
 dependencies:
   '@testing-library/jest-dom': 5.13.0
@@ -25,6 +26,7 @@ dependencies:
   react-router-dom: 5.2.0_react@17.0.2
   react-scripts: 4.0.3_node-sass@6.0.0+react@17.0.2
   redux: 4.1.0
+  redux-thunk: 2.3.0
 
 packages:
 
@@ -9966,6 +9968,10 @@ packages:
     dependencies:
       indent-string: 4.0.0
       strip-indent: 3.0.0
+    dev: false
+
+  /redux-thunk/2.3.0:
+    resolution: {integrity: sha512-km6dclyFnmcvxhAcrQV2AkZmPQjzPDjgVlQtR0EQjxZPyJ0BnMf3in1ryuR8A2qU0HldVRfxYXbFSKlI3N7Slw==}
     dev: false
 
   /redux/4.1.0:

@@ -1,24 +1,18 @@
-import React/* , { Fragment } */ from 'react';
+import React from 'react';
 
 import './book-list-item.scss';
 
 const BookListItem = ({ book, onAddedToCart }) => {
-  const { title, author, price, coverImage } = book;
+  const { title, author, price, coverImage, page } = book;
 
   return (
-    //   <Fragment>
-    //       <span>{title}</span>
-    //       <span>{author}</span>
-    //       <span>{price}</span>
-    //       <span>{coverImage}</span>
-    //   </Fragment>
     <div className="book-list-item">
       <div className="book-cover">
         <img src={coverImage} alt="cover" />
       </div>
       <div className="book-details">
-        {/* <a href="#" className="book-title">{title}</a> */}
-        <span className="book-title">{title}</span>
+        <a href={page} target="_blank" rel="noreferrer" className="book-title">{title}</a>
+       {/*  <span className="book-title">{title}</span> */}
         <div className="book-author">{author}</div>
         <div className="book-price">${price}</div>
         <button 

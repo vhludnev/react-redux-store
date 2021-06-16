@@ -1,24 +1,23 @@
 const updateCartItems = (cartItems, item, idx) => {
-
     if (item.count === 0) {                 // removing element (book row)
       return [
         ...cartItems.slice(0, idx),
         ...cartItems.slice(idx + 1)
-      ];
+      ]
     }
   
     if (idx === -1) {                       // adding a new element
       return [
         ...cartItems,
         item
-      ];
+      ]
     }
-  
-    return [                                // updating elements
+    
+    return  [                                // updating elements
       ...cartItems.slice(0, idx),
       item,
       ...cartItems.slice(idx + 1)
-    ];
+    ]
   };
   
   const updateCartItem = (book, item = {}, quantity) => {
@@ -43,18 +42,20 @@ const updateCartItems = (cartItems, item, idx) => {
     const book = books.find(({id}) => id === bookId);
     const itemIndex = cartItems.findIndex(({id}) => id === bookId);
     const item = cartItems[itemIndex];
-  
-    const newItem = updateCartItem(book, item, quantity);
+
+    const newItem = updateCartItem(book, item, quantity); 
+
     return {
-      orderTotal: 0,
+      totalCount: updateCartItems(cartItems, newItem, itemIndex).map(item => item.count).reduce((a, b) => (a + b), 0),
+      orderTotal: updateCartItems(cartItems, newItem, itemIndex).map(item => item.total).reduce((a, b) => (a + b), 0).toFixed(2),
       cartItems: updateCartItems(cartItems, newItem, itemIndex)
     };
   };
   
   const updateShoppingCart = (state, action) => {
-  
     if (state === undefined) {
       return {
+        totalCount: 0,
         cartItems: [],
         orderTotal: 0
       }

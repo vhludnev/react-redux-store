@@ -8,7 +8,7 @@ import './app.scss';
 const App = () => {
   return (
     <main role="main" className="container">
-      <ShopHeader numItems={5} total={210}/>
+      <ShopHeader />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/cart" component={CartPage} />
@@ -18,15 +18,3 @@ const App = () => {
 }
 
 export default App;
-
-
-
-
-// import { withBookstoreService } from '../hoc';
-
-// const App = ({ bookstoreService }) => {
-//   console.log(bookstoreService.getBooks());
-//   return <div>App</div>;
-// }
-
-// export default withBookstoreService()(App);

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import BookListItem from '../book-list-item';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import BookListItem from '../book-list-item';
 import { withBookstoreService } from '../hoc';
-// import { booksLoaded, booksRequested, booksError } from '../actions';
 import { fetchBooks, bookAddedToCart } from '../actions';
 import { compose } from '../utils';
 import Spinner from '../spinner';
@@ -46,28 +46,16 @@ class BookListContainer extends Component {
   }
 }
 
-// const mapStateToProps = ({ books, loading, error }) => {    // the same as: const mapStateToProps = ( state ) =>
 const mapStateToProps = ({ bookList: { books, loading, error }}) => {
-  return { books, loading, error };                            //                  return { books: state.books }; };
+  return { books, loading, error };                            
 };
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         booksLoaded: (newBooks) => {
-//             dispatch({
-//                 type: 'BOOKS_LOADED',
-//                 payload: newBooks
-//             });
-//         }
-//     };
-// }
 
 const mapDispatchToProps = (dispatch, { bookstoreService }) => {
 
-  return {
-    fetchBooks: fetchBooks(bookstoreService, dispatch),
-    onAddedToCart: (id) => dispatch(bookAddedToCart(id))
-  };
+  return bindActionCreators({
+    fetchBooks: fetchBooks(bookstoreService),      
+    onAddedToCart: bookAddedToCart
+  }, dispatch);
 };
 
 

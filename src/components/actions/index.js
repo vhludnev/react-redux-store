@@ -1,6 +1,5 @@
 const booksLoaded = (newBooks) => {
   return {
-    //type: 'BOOKS_LOADED',
     type: 'FETCH_BOOKS_SUCCESS',
     payload: newBooks
   };
@@ -8,14 +7,12 @@ const booksLoaded = (newBooks) => {
 
 const booksRequested = () => {
   return {
-    //type: 'BOOKS_REQUESTED'
     type: 'FETCH_BOOKS_REQUEST'
   };
 };
 
 const booksError = (error) => {
   return {
-    // type: 'BOOKS_ERROR',
     type: 'FETCH_BOOKS_FAILURE',
     payload: error
   };
@@ -42,7 +39,8 @@ export const allBooksRemovedFromCart = (bookId) => {
   };
 };
 
-const fetchBooks = (bookstoreService, dispatch) => () => {
+
+const fetchBooks = (bookstoreService) => () => (dispatch) => {              // special sintaksis to work with Thunk store
   dispatch(booksRequested());
   bookstoreService.getBooks()
     .then((data) => dispatch(booksLoaded(data)))
@@ -52,9 +50,3 @@ const fetchBooks = (bookstoreService, dispatch) => () => {
 export {
   fetchBooks
 };
-
-// export {
-//   booksLoaded,
-//   booksRequested,
-//   booksError
-// };
